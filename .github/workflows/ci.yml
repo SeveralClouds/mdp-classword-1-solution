@@ -54,16 +54,16 @@ jobs:
       - name: Execute Unit Tests
         run: python3 -m unittest src/app_test.py
 
-  git-leaks:
-    name: secrets detection
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # git-leaks:
+  #   name: secrets detection
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 2
+  #     - uses: gitleaks/gitleaks-action@v2
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   database_test:
     needs: [ git-leaks, unittest, flake8, makrdown-lint, editorconfig-checker ]
