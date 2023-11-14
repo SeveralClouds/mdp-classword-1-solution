@@ -66,7 +66,7 @@ jobs:
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   database_test:
-    needs: [ git-leaks, unittest, flake8, makrdown-lint, editorconfig-checker ]
+    needs: [ unittest, flake8, makrdown-lint, editorconfig-checker ]
     runs-on: ubuntu-latest
     services:
       postgres:
