@@ -66,13 +66,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   sast:
-    # needs: [database_test]
+    needs: [ git-leaks, unittest, flake8, makrdown-lint, editorconfig-checker ]
     runs-on: ubuntu-latest
     steps:
       - run: echo "SAST"
 
   sca:
-    # needs: [database_test]
+    needs: [ git-leaks, unittest, flake8, makrdown-lint, editorconfig-checker ]
     runs-on: ubuntu-latest
     steps:
       - run: echo "SCA"
