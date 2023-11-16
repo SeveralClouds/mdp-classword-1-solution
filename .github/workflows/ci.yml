@@ -148,5 +148,3 @@ jobs:
       run: docker tag "classwork-image" ${{ secrets.DOCKERHUB_USERNAME }}"/classwork-image"
     - name: Docker Push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}"/classwork-image"
-    
-      
