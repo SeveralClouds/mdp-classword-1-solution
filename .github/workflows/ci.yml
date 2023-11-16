@@ -89,14 +89,29 @@ jobs:
           password: password
       - run: echo 'testing'
 
-  sast:
+  sonarcloud:
     needs: [ database_test ]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "SAST"
+    - uses: actions/checkout@v3
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  sca:
+  snyk:
     needs: [ database_test ]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "SCA"
+    - uses: actions/checkout@v3
+    - name: Run Snyk
+      working-directory: ${{github.workspace}}/src
+      run: |
+        pip install -r requirements.txt
+        npm install -g snyk
+        snyk auth ${{ secrets.SNYK_TOKEN }}
+        snyk test
