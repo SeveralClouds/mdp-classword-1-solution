@@ -3,7 +3,6 @@ name: Pull request
 on:
   pull_request:
     types: [opened, reopened]
-    
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
