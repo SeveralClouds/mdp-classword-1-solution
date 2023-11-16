@@ -117,7 +117,7 @@ jobs:
         snyk test
 
   test-docker-image:
-    # needs: [ database_test ]
+    needs: [ unittest, flake8, makrdown-lint, editorconfig-checker ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -133,7 +133,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
 
   push-docker-image:
-    needs: [ test-docker-image ]
+    needs: [ test-docker-image, snyk, sonarcloud ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
